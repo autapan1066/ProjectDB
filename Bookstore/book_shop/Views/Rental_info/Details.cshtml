@@ -1,0 +1,68 @@
+﻿@model book_shop.Models.Rental_info
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rental_info</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rent_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rent_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Due_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Due_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Cname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Cname)
+        </dd>
+
+    </dl>
+    <h2>List Books</h2>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+
+        @foreach (var books in Model.Book)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => books.Title)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => books.Price)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @if (Session["UserName"].ToString() == "admin")
+    {
+        <p>
+           @Html.ActionLink("Edit", "Edit", new { id = Model.Rid }) |
+        </p>
+    }
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

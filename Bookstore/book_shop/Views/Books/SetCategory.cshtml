@@ -1,0 +1,42 @@
+﻿@model book_shop.Models.Book
+
+@{
+    ViewBag.Title = "SetCategory";
+    var cates = ViewData["Cates"] as List<book_shop.Models.Category>;
+}
+
+<h2>SetCategory</h2>
+
+<div>
+    <h4>Book</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h4>Category</h4>
+    <table>
+        <tr>
+            <th>Category Name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var acate in cates)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => acate.Name)</td>
+                <td>@Html.ActionLink("Add", "AddCategory", "Books", new { id = Model.Bid, cid = acate.Id }, null)</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Bid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

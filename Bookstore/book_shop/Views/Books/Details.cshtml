@@ -1,0 +1,96 @@
+﻿@model book_shop.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h4>Category</h4>
+    
+    <table>
+        <tr>
+            <th>Category Name</th>
+        </tr>
+        @foreach (var acate in Model.Category)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => acate.Name)</td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <h4>Author</h4>
+    
+    <table>
+        <tr>
+            <th>Author Name</th>
+        </tr>
+        @foreach (var anau in Model.Author)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => anau.Name)</td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <h4>Publisher</h4>
+    
+    <table>
+        <tr>
+            <th>Publisher Name</th>
+        </tr>
+        @foreach (var apub in Model.Publisher)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => apub.Name)</td>
+            </tr>
+        }
+    </table>
+</div>
+@if (Session["UserName"].ToString() == "admin")
+{  <p>
+        @Html.ActionLink("Set Category", "SetCategory", "Books", new { id = Model.Bid }, null) |
+        @Html.ActionLink("Set Author", "SetAuthor", "Books", new { id = Model.Bid }, null) |
+        @Html.ActionLink("Set Publisher", "SetPublisher", "Books", new { id = Model.Bid }, null) |
+       @Html.ActionLink("Edit", "Edit", new { id = Model.Bid })
+    </p>
+}
+<p>
+
+   
+    @Html.ActionLink("Back to List", "Index")
+</p>

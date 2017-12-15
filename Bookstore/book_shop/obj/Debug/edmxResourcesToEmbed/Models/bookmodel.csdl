@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="bookmodel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="bookmodelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BookSet1" EntityType="bookmodel.Book" />
+    <EntitySet Name="AuthorSet" EntityType="bookmodel.Author" />
+    <EntitySet Name="PublisherSet" EntityType="bookmodel.Publisher" />
+    <EntitySet Name="CategorySet" EntityType="bookmodel.Category" />
+    <EntitySet Name="Rental_infoSet" EntityType="bookmodel.Rental_info" />
+    <EntitySet Name="CustomerSet" EntityType="bookmodel.Customer" />
+    <AssociationSet Name="CustomerRental_info" Association="bookmodel.CustomerRental_info">
+      <End Role="Customer" EntitySet="CustomerSet" />
+      <End Role="Rental_info" EntitySet="Rental_infoSet" />
+    </AssociationSet>
+    <AssociationSet Name="Rental_infoBook" Association="bookmodel.Rental_infoBook">
+      <End Role="Rental_info" EntitySet="Rental_infoSet" />
+      <End Role="Book" EntitySet="BookSet1" />
+    </AssociationSet>
+    <AssociationSet Name="BookAuthor" Association="bookmodel.BookAuthor">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="Author" EntitySet="AuthorSet" />
+    </AssociationSet>
+    <AssociationSet Name="BookCategory" Association="bookmodel.BookCategory">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="Category" EntitySet="CategorySet" />
+    </AssociationSet>
+    <AssociationSet Name="BookPublisher" Association="bookmodel.BookPublisher">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="Publisher" EntitySet="PublisherSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Bid" />
+    </Key>
+    <Property Name="Bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" />
+    <Property Name="Price" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Rental_info" Relationship="bookmodel.Rental_infoBook" FromRole="Book" ToRole="Rental_info" />
+    <NavigationProperty Name="Author" Relationship="bookmodel.BookAuthor" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="Category" Relationship="bookmodel.BookCategory" FromRole="Book" ToRole="Category" />
+    <NavigationProperty Name="Publisher" Relationship="bookmodel.BookPublisher" FromRole="Book" ToRole="Publisher" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="bookmodel.BookAuthor" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="bookmodel.BookPublisher" FromRole="Publisher" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="bookmodel.BookCategory" FromRole="Category" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Rental_info">
+    <Key>
+      <PropertyRef Name="Rid" />
+    </Key>
+    <Property Name="Rid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rent_date" Type="DateTime" Nullable="false" />
+    <Property Name="Due_date" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="bookmodel.CustomerRental_info" FromRole="Rental_info" ToRole="Customer" />
+    <Property Name="CustomerCid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="bookmodel.Rental_infoBook" FromRole="Rental_info" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Cid" />
+    </Key>
+    <Property Name="Cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cname" Type="String" Nullable="false" />
+    <Property Name="Phone" Type="String" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" />
+    <NavigationProperty Name="Rental_info" Relationship="bookmodel.CustomerRental_info" FromRole="Customer" ToRole="Rental_info" />
+  </EntityType>
+  <Association Name="CustomerRental_info">
+    <End Type="bookmodel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="bookmodel.Rental_info" Role="Rental_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Cid" />
+      </Principal>
+      <Dependent Role="Rental_info">
+        <PropertyRef Name="CustomerCid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Rental_infoBook">
+    <End Type="bookmodel.Rental_info" Role="Rental_info" Multiplicity="*" />
+    <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+  </Association>
+  <Association Name="BookAuthor">
+    <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+    <End Type="bookmodel.Author" Role="Author" Multiplicity="*" />
+  </Association>
+  <Association Name="BookCategory">
+    <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+    <End Type="bookmodel.Category" Role="Category" Multiplicity="*" />
+  </Association>
+  <Association Name="BookPublisher">
+    <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+    <End Type="bookmodel.Publisher" Role="Publisher" Multiplicity="*" />
+  </Association>
+</Schema>

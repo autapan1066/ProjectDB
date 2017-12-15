@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bookmodelStoreContainer" CdmEntityContainer="bookmodelContainer">
+    <EntitySetMapping Name="BookSet1">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Book)">
+        <MappingFragment StoreEntitySet="BookSet1">
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Author)">
+        <MappingFragment StoreEntitySet="AuthorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PublisherSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Publisher)">
+        <MappingFragment StoreEntitySet="PublisherSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategorySet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Category)">
+        <MappingFragment StoreEntitySet="CategorySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rental_infoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Rental_info)">
+        <MappingFragment StoreEntitySet="Rental_infoSet">
+          <ScalarProperty Name="Rid" ColumnName="Rid" />
+          <ScalarProperty Name="Rent_date" ColumnName="Rent_date" />
+          <ScalarProperty Name="Due_date" ColumnName="Due_date" />
+          <ScalarProperty Name="CustomerCid" ColumnName="CustomerCid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Customer)">
+        <MappingFragment StoreEntitySet="CustomerSet">
+          <ScalarProperty Name="Cid" ColumnName="Cid" />
+          <ScalarProperty Name="Cname" ColumnName="Cname" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Rental_infoBook" TypeName="bookmodel.Rental_infoBook" StoreEntitySet="Rental_infoBook">
+      <EndProperty Name="Rental_info">
+        <ScalarProperty Name="Rid" ColumnName="Rental_info_Rid" />
+      </EndProperty>
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookAuthor" TypeName="bookmodel.BookAuthor" StoreEntitySet="BookAuthor">
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+      <EndProperty Name="Author">
+        <ScalarProperty Name="Id" ColumnName="Author_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookCategory" TypeName="bookmodel.BookCategory" StoreEntitySet="BookCategory">
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+      <EndProperty Name="Category">
+        <ScalarProperty Name="Id" ColumnName="Category_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookPublisher" TypeName="bookmodel.BookPublisher" StoreEntitySet="BookPublisher">
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+      <EndProperty Name="Publisher">
+        <ScalarProperty Name="Id" ColumnName="Publisher_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

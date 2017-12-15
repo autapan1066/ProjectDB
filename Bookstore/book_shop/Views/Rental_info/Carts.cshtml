@@ -1,0 +1,37 @@
+﻿@model book_shop.Models.Rental_info
+@{
+    ViewBag.Title = "Carts";
+}
+
+<h2>Carts</h2>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Price</th>
+    </tr>
+
+    @foreach (var books in Model.Book)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => books.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => books.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => books.Price)
+            </td>
+        </tr>
+    }
+ 
+   
+
+
+
+</table>
+@Html.ActionLink("Confirm", "Index", "Books") 
+
+
+

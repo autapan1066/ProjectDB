@@ -1,0 +1,46 @@
+﻿@model book_shop.Models.Customer
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Customers", FormMethod.Post))
+{
+    <fieldset>
+ 
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div> }
+        <table>
+            <tr>
+                <td>Username</td>
+                <td>@Html.TextBoxFor(a => a.Cname)</td>
+                <td>@Html.ValidationMessageFor(a => a.Cname)</td>
+            </tr>
+            <tr>
+                <td>
+                    Password
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.Phone)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Phone)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" class="btn btn-secondary" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}

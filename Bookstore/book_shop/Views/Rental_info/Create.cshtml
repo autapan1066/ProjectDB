@@ -1,0 +1,66 @@
+﻿@model book_shop.Models.Rental_info
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Rental information</h4>
+        *****Date Picker Bug ลองเปลี่ยนวันเรื่อยๆจนกว่าจะเด้งหน้าถัดไป****
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rent_date,"Rent Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               
+                @Html.TextBoxFor(model => model.Rent_date, "{0:dd-MM-yyyy}", new { @class = "form-control jqueryui-marker-datepicker" })
+                @Html.ValidationMessageFor(model => model.Rent_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerCid, "Username", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CustomerCid", null, htmlAttributes: new { @class = "form-control" })
+              
+                @Html.ValidationMessageFor(model => model.CustomerCid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Due_date,"Due Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Due_date, "{0:dd-MM-yyyy}", new { @class = "form-control jqueryui-marker-datepicker" })
+                @Html.ValidationMessageFor(model => model.Due_date, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+           
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

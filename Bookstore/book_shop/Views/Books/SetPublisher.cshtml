@@ -1,0 +1,42 @@
+﻿@model book_shop.Models.Book
+
+@{
+    ViewBag.Title = "SetPublisher";
+    var pubs = ViewData["Pubs"] as List<book_shop.Models.Publisher>;
+}
+
+<h2>SetPublisher</h2>
+
+<div>
+    <h4>Book</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h4>Publisher</h4>
+    <table>
+        <tr>
+            <th>Publisher Name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var apub in pubs)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => apub.Name)</td>
+                <td>@Html.ActionLink("Add", "AddPublisher", "Books", new { id = Model.Bid, pid = apub.Id }, null)</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Bid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<book_shop.Models.Book>
+
+@{
+    ViewBag.Title = "Book Store";
+}
+
+
+<h2>Book Store</h2>
+
+
+@if (Session["UserName"].ToString() == "admin")
+{
+    
+    <p>
+        @Html.ActionLink("Create New Books", "Create")
+    </p>
+}
+
+@Html.ActionLink("View Rent", "index", "Rental_info")
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        @if (Session["UserName"].ToString() == "admin")
+        {
+
+            <th>
+                Return Books
+            </th>
+
+        }
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            @if (Session["UserName"].ToString() == "admin")
+            { 
+                <td>@Html.ActionLink("Return", "ReturnBook", new { id = item.Bid })</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Bid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Bid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Bid }) 
+               
+              
+            </td>
+            }
+            @if (Session["UserName"].ToString() != "admin")
+            {
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Bid }) 
+
+                </td>
+            }
+
+        </tr>
+    }
+
+</table>

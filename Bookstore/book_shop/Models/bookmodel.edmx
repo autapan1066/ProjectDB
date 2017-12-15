@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bookmodel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="bookmodelStoreContainer">
+    <EntitySet Name="BookSet1" EntityType="bookmodel.Store.BookSet1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AuthorSet" EntityType="bookmodel.Store.AuthorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PublisherSet" EntityType="bookmodel.Store.PublisherSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategorySet" EntityType="bookmodel.Store.CategorySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rental_infoSet" EntityType="bookmodel.Store.Rental_infoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CustomerSet" EntityType="bookmodel.Store.CustomerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rental_infoBook" EntityType="bookmodel.Store.Rental_infoBook" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookAuthor" EntityType="bookmodel.Store.BookAuthor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookCategory" EntityType="bookmodel.Store.BookCategory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookPublisher" EntityType="bookmodel.Store.BookPublisher" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerRental_info" Association="bookmodel.Store.CustomerRental_info">
+      <End Role="Customer" EntitySet="CustomerSet" />
+      <End Role="Rental_info" EntitySet="Rental_infoSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rental_infoBook_Rental_info" Association="bookmodel.Store.FK_Rental_infoBook_Rental_info">
+      <End Role="Rental_info" EntitySet="Rental_infoSet" />
+      <End Role="Rental_infoBook" EntitySet="Rental_infoBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rental_infoBook_Book" Association="bookmodel.Store.FK_Rental_infoBook_Book">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="Rental_infoBook" EntitySet="Rental_infoBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookAuthor_Book" Association="bookmodel.Store.FK_BookAuthor_Book">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="BookAuthor" EntitySet="BookAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookAuthor_Author" Association="bookmodel.Store.FK_BookAuthor_Author">
+      <End Role="Author" EntitySet="AuthorSet" />
+      <End Role="BookAuthor" EntitySet="BookAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookCategory_Book" Association="bookmodel.Store.FK_BookCategory_Book">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="BookCategory" EntitySet="BookCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookCategory_Category" Association="bookmodel.Store.FK_BookCategory_Category">
+      <End Role="Category" EntitySet="CategorySet" />
+      <End Role="BookCategory" EntitySet="BookCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookPublisher_Book" Association="bookmodel.Store.FK_BookPublisher_Book">
+      <End Role="Book" EntitySet="BookSet1" />
+      <End Role="BookPublisher" EntitySet="BookPublisher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookPublisher_Publisher" Association="bookmodel.Store.FK_BookPublisher_Publisher">
+      <End Role="Publisher" EntitySet="PublisherSet" />
+      <End Role="BookPublisher" EntitySet="BookPublisher" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BookSet1">
+    <Key>
+      <PropertyRef Name="Bid" />
+    </Key>
+    <Property Name="Bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuthorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PublisherSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategorySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rental_infoSet">
+    <Key>
+      <PropertyRef Name="Rid" />
+    </Key>
+    <Property Name="Rid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rent_date" Type="datetime" Nullable="false" />
+    <Property Name="Due_date" Type="datetime" Nullable="false" />
+    <Property Name="CustomerCid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerSet">
+    <Key>
+      <PropertyRef Name="Cid" />
+    </Key>
+    <Property Name="Cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rental_infoBook">
+    <Key>
+      <PropertyRef Name="Rental_info_Rid" />
+      <PropertyRef Name="Book_Bid" />
+    </Key>
+    <Property Name="Rental_info_Rid" Type="int" Nullable="false" />
+    <Property Name="Book_Bid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookAuthor">
+    <Key>
+      <PropertyRef Name="Book_Bid" />
+      <PropertyRef Name="Author_Id" />
+    </Key>
+    <Property Name="Book_Bid" Type="int" Nullable="false" />
+    <Property Name="Author_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookCategory">
+    <Key>
+      <PropertyRef Name="Book_Bid" />
+      <PropertyRef Name="Category_Id" />
+    </Key>
+    <Property Name="Book_Bid" Type="int" Nullable="false" />
+    <Property Name="Category_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookPublisher">
+    <Key>
+      <PropertyRef Name="Book_Bid" />
+      <PropertyRef Name="Publisher_Id" />
+    </Key>
+    <Property Name="Book_Bid" Type="int" Nullable="false" />
+    <Property Name="Publisher_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerRental_info">
+    <End Role="Customer" Type="bookmodel.Store.CustomerSet" Multiplicity="1" />
+    <End Role="Rental_info" Type="bookmodel.Store.Rental_infoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Cid" />
+      </Principal>
+      <Dependent Role="Rental_info">
+        <PropertyRef Name="CustomerCid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rental_infoBook_Rental_info">
+    <End Role="Rental_info" Type="bookmodel.Store.Rental_infoSet" Multiplicity="1" />
+    <End Role="Rental_infoBook" Type="bookmodel.Store.Rental_infoBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rental_info">
+        <PropertyRef Name="Rid" />
+      </Principal>
+      <Dependent Role="Rental_infoBook">
+        <PropertyRef Name="Rental_info_Rid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rental_infoBook_Book">
+    <End Role="Rental_infoBook" Type="bookmodel.Store.Rental_infoBook" Multiplicity="*" />
+    <End Role="Book" Type="bookmodel.Store.BookSet1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Bid" />
+      </Principal>
+      <Dependent Role="Rental_infoBook">
+        <PropertyRef Name="Book_Bid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookAuthor_Book">
+    <End Role="Book" Type="bookmodel.Store.BookSet1" Multiplicity="1" />
+    <End Role="BookAuthor" Type="bookmodel.Store.BookAuthor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Bid" />
+      </Principal>
+      <Dependent Role="BookAuthor">
+        <PropertyRef Name="Book_Bid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookAuthor_Author">
+    <End Role="BookAuthor" Type="bookmodel.Store.BookAuthor" Multiplicity="*" />
+    <End Role="Author" Type="bookmodel.Store.AuthorSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookAuthor">
+        <PropertyRef Name="Author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookCategory_Book">
+    <End Role="Book" Type="bookmodel.Store.BookSet1" Multiplicity="1" />
+    <End Role="BookCategory" Type="bookmodel.Store.BookCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Bid" />
+      </Principal>
+      <Dependent Role="BookCategory">
+        <PropertyRef Name="Book_Bid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookCategory_Category">
+    <End Role="BookCategory" Type="bookmodel.Store.BookCategory" Multiplicity="*" />
+    <End Role="Category" Type="bookmodel.Store.CategorySet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookCategory">
+        <PropertyRef Name="Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookPublisher_Book">
+    <End Role="Book" Type="bookmodel.Store.BookSet1" Multiplicity="1" />
+    <End Role="BookPublisher" Type="bookmodel.Store.BookPublisher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Bid" />
+      </Principal>
+      <Dependent Role="BookPublisher">
+        <PropertyRef Name="Book_Bid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookPublisher_Publisher">
+    <End Role="BookPublisher" Type="bookmodel.Store.BookPublisher" Multiplicity="*" />
+    <End Role="Publisher" Type="bookmodel.Store.PublisherSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookPublisher">
+        <PropertyRef Name="Publisher_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="bookmodel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="bookmodelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookSet1" EntityType="bookmodel.Book" />
+          <EntitySet Name="AuthorSet" EntityType="bookmodel.Author" />
+          <EntitySet Name="PublisherSet" EntityType="bookmodel.Publisher" />
+          <EntitySet Name="CategorySet" EntityType="bookmodel.Category" />
+          <EntitySet Name="Rental_infoSet" EntityType="bookmodel.Rental_info" />
+          <EntitySet Name="CustomerSet" EntityType="bookmodel.Customer" />
+          <AssociationSet Name="CustomerRental_info" Association="bookmodel.CustomerRental_info">
+            <End Role="Customer" EntitySet="CustomerSet" />
+            <End Role="Rental_info" EntitySet="Rental_infoSet" />
+          </AssociationSet>
+          <AssociationSet Name="Rental_infoBook" Association="bookmodel.Rental_infoBook">
+            <End Role="Rental_info" EntitySet="Rental_infoSet" />
+            <End Role="Book" EntitySet="BookSet1" />
+          </AssociationSet>
+          <AssociationSet Name="BookAuthor" Association="bookmodel.BookAuthor">
+            <End Role="Book" EntitySet="BookSet1" />
+            <End Role="Author" EntitySet="AuthorSet" />
+          </AssociationSet>
+          <AssociationSet Name="BookCategory" Association="bookmodel.BookCategory">
+            <End Role="Book" EntitySet="BookSet1" />
+            <End Role="Category" EntitySet="CategorySet" />
+          </AssociationSet>
+          <AssociationSet Name="BookPublisher" Association="bookmodel.BookPublisher">
+            <End Role="Book" EntitySet="BookSet1" />
+            <End Role="Publisher" EntitySet="PublisherSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Bid" />
+          </Key>
+          <Property Name="Bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Rental_info" Relationship="bookmodel.Rental_infoBook" FromRole="Book" ToRole="Rental_info" />
+          <NavigationProperty Name="Author" Relationship="bookmodel.BookAuthor" FromRole="Book" ToRole="Author" />
+          <NavigationProperty Name="Category" Relationship="bookmodel.BookCategory" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="Publisher" Relationship="bookmodel.BookPublisher" FromRole="Book" ToRole="Publisher" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="bookmodel.BookAuthor" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="bookmodel.BookPublisher" FromRole="Publisher" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="bookmodel.BookCategory" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Rental_info">
+          <Key>
+            <PropertyRef Name="Rid" />
+          </Key>
+          <Property Name="Rid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rent_date" Type="DateTime" Nullable="false" />
+          <Property Name="Due_date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="bookmodel.CustomerRental_info" FromRole="Rental_info" ToRole="Customer" />
+          <Property Name="CustomerCid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="bookmodel.Rental_infoBook" FromRole="Rental_info" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cid" />
+          </Key>
+          <Property Name="Cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cname" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <NavigationProperty Name="Rental_info" Relationship="bookmodel.CustomerRental_info" FromRole="Customer" ToRole="Rental_info" />
+        </EntityType>
+        <Association Name="CustomerRental_info">
+          <End Type="bookmodel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="bookmodel.Rental_info" Role="Rental_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="Rental_info">
+              <PropertyRef Name="CustomerCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rental_infoBook">
+          <End Type="bookmodel.Rental_info" Role="Rental_info" Multiplicity="*" />
+          <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+        </Association>
+        <Association Name="BookAuthor">
+          <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+          <End Type="bookmodel.Author" Role="Author" Multiplicity="*" />
+        </Association>
+        <Association Name="BookCategory">
+          <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+          <End Type="bookmodel.Category" Role="Category" Multiplicity="*" />
+        </Association>
+        <Association Name="BookPublisher">
+          <End Type="bookmodel.Book" Role="Book" Multiplicity="*" />
+          <End Type="bookmodel.Publisher" Role="Publisher" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bookmodelStoreContainer" CdmEntityContainer="bookmodelContainer">
+    <EntitySetMapping Name="BookSet1">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Book)">
+        <MappingFragment StoreEntitySet="BookSet1">
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Author)">
+        <MappingFragment StoreEntitySet="AuthorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PublisherSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Publisher)">
+        <MappingFragment StoreEntitySet="PublisherSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategorySet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Category)">
+        <MappingFragment StoreEntitySet="CategorySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rental_infoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Rental_info)">
+        <MappingFragment StoreEntitySet="Rental_infoSet">
+          <ScalarProperty Name="Rid" ColumnName="Rid" />
+          <ScalarProperty Name="Rent_date" ColumnName="Rent_date" />
+          <ScalarProperty Name="Due_date" ColumnName="Due_date" />
+          <ScalarProperty Name="CustomerCid" ColumnName="CustomerCid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(bookmodel.Customer)">
+        <MappingFragment StoreEntitySet="CustomerSet">
+          <ScalarProperty Name="Cid" ColumnName="Cid" />
+          <ScalarProperty Name="Cname" ColumnName="Cname" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Rental_infoBook" TypeName="bookmodel.Rental_infoBook" StoreEntitySet="Rental_infoBook">
+      <EndProperty Name="Rental_info">
+        <ScalarProperty Name="Rid" ColumnName="Rental_info_Rid" />
+      </EndProperty>
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookAuthor" TypeName="bookmodel.BookAuthor" StoreEntitySet="BookAuthor">
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+      <EndProperty Name="Author">
+        <ScalarProperty Name="Id" ColumnName="Author_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookCategory" TypeName="bookmodel.BookCategory" StoreEntitySet="BookCategory">
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+      <EndProperty Name="Category">
+        <ScalarProperty Name="Id" ColumnName="Category_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BookPublisher" TypeName="bookmodel.BookPublisher" StoreEntitySet="BookPublisher">
+      <EndProperty Name="Book">
+        <ScalarProperty Name="Bid" ColumnName="Book_Bid" />
+      </EndProperty>
+      <EndProperty Name="Publisher">
+        <ScalarProperty Name="Id" ColumnName="Publisher_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

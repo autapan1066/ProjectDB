@@ -1,0 +1,64 @@
+﻿@model book_shop.Models.Rental_info
+@{
+    ViewBag.Title = "AddBook";
+    var book = ViewData["Books"] as List<book_shop.Models.Book>;
+}
+<h2>In progress</h2>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+    </tr>
+
+    @foreach (var books in Model.Book)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => books.Title)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => books.Price)
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Checkout", "Index", "Books")
+
+    <h3>AddBook</h3>
+    <br />
+
+    <br />
+    <h4>List of books</h4>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Price</th>
+        </tr>
+
+        @foreach (var item in book)
+        { 
+           if (item.Status.ToString() != "ยืม") {
+    
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Add", "SelectBook", "Rental_info", new { Rid = Model.Rid, Bid = item.Bid }, null)
+                </td>
+            </tr>
+                }
+            }
+
+    </table>
+
+
